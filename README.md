@@ -6,6 +6,7 @@ This project involves developing a web-based platform that displays crime data f
 - Abel Tola
 - Cristin Pappachan Philip
 - Jalees Ahmad
+- Lance Samonte
 - Josh Hernandez Martinez
 - Nicholas Flay
 - William Nzoukekang Motsou
