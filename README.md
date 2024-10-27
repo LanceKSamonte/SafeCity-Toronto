@@ -1,2 +1,3 @@
 # SafeCity-Toronto
-Toronto interactive crime map
+
+This project involves developing a web-based platform that displays crime data for the City of Toronto using an open data catalogue. The platform will feature an interactive map where users can explore crime statistics by area, filter data by crime type and time, and view trends over specific periods. The primary goal of the project is to provide users with easy access to detailed crime information to promote public safety and awareness.
