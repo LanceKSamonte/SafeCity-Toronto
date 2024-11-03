@@ -6,4 +6,4 @@ const map = new mapboxgl.Map({
     zoom: 11 // starting zoom
 });
 
-//funny :)
+//funny :) haha
