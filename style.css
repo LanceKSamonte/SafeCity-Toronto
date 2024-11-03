@@ -1,0 +1,43 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    background-color: #f0f0f0; 
+}
+#map {
+    width: 60%; /* Width of the map container */
+    height: 80%; /* Height of the map container */
+    border: 1px solid #505050; /* border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* slight shadow cuz cool */
+}
+
+#sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 200px; /* Width of the sidebar */
+    height: 80%; /* Height matches map*/
+    background-color: #636363; 
+    padding-right: 5px;
+    padding-left: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* slight shadow cuz cool */
+    border-left: 2px solid #505050; 
+    border-top: 2px solid #505050; 
+}
+
+.sidebar-button {
+    background-color: #e0e0e0; 
+    color: rgb(35, 34, 34);  
+    padding: 10px; 
+    margin-bottom: 10px;
+    border-radius: 5px; 
+    cursor: pointer; 
+}
+
+.sidebar-button:hover {
+    background-color: #9d9e9f; /* Darker shade on hover */
+}
+
