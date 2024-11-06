@@ -7,7 +7,7 @@ body {
     height: 100vh; /* Full viewport height */
     background-color: #f0f0f0; 
 }
-#map {
+#display {
     width: 60%; /* Width of the map container */
     height: 80%; /* Height of the map container */
     border: 1px solid #505050; /* border */
@@ -41,3 +41,12 @@ body {
     background-color: #9d9e9f; /* Darker shade on hover */
 }
 
+#filterBox {
+    position: absolute;
+    top: 115px;
+    left: 223px;
+    background-color: white;
+    border: 1px black;
+    padding: 15px;
+    z-index: 500; /* so it appears over the side bar */
+}
