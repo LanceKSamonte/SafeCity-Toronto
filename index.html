@@ -4,21 +4,33 @@
     <meta charset="utf-8">
     <title>SafeCity Toronto</title>
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-    <link href="https://api.mapbox.com/mapbox-gl-js/v3.7.0/mapbox-gl.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/> <!-- Leaflet stuff (literally don't ask idk anything)-->
     <link rel="stylesheet" href="style.css"> <!-- Link to the CSS file -->
 </head>
 <body>
+    <!-- Sidebar on the left with all the buttons -->
     <div id="sidebar">
-        <button class="sidebar-button">Map</button>
-        <button class="sidebar-button">Filter</button>
+        <button class="sidebar-button" id="mapButton">Map</button>
+        <button class="sidebar-button" id="filterButton">Filter</button>
         <button class="sidebar-button">Graphs</button>
         <button class="sidebar-button">Report</button>
         <button class="sidebar-button">Export</button>
     </div>
-    <div id="map"></div>
-
-    <script src="https://api.mapbox.com/mapbox-gl-js/v3.7.0/mapbox-gl.js"></script>
-    <script src="map.js"></script> <!-- Link to the JavaScript file -->
+    <!-- Popup box for the filters. It will appear at the top of the sidebar-->
+    <div id="filterBox" style="display: none;">
+        <h3>Filters</h3>
+        <label><input type="checkbox" id="neighborhoodCheckbox">Neighborhoods</label><br>
+        <!-- Add more neighborhoods as needed -->
+    </div>
+    
+    <div id="display"></div> <!-- Display area -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script> <!-- Leaflet stuff (literally don't ask idk anything)-->
+    <script src="map.js"></script> <!-- Link to the map display -->
+    <script src="filters.js"></script> <!-- Link to the filters script file-->
     
 </body>
 </html>

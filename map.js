@@ -1,9 +1,9 @@
-// free public access token
-mapboxgl.accessToken = 'pk.eyJ1IjoibGFuY2V3YW50c3JpY2UiLCJhIjoiY20zMTJtb21yMHFxYzJrcTFhMHFiODJ3bSJ9.zwoA8m9s-cmwxX48vFxHsw';
-const map = new mapboxgl.Map({
-    container: 'map', // container ID
-    center: [-79.377319, 43.653963], // starting position [lng, lat]
-    zoom: 11 // starting zoom
-});
+// Leaflet api stuff to show the map
+// literally copy pasted from their website https://leafletjs.com/examples/quick-start/
 
-//funny :) haha lol
+var map = L.map('display').setView([43.653963, -79.377319], 10);
+
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
