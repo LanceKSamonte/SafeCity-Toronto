@@ -10,27 +10,44 @@
     <link rel="stylesheet" href="style.css"> <!-- Link to the CSS file -->
 </head>
 <body>
+  
     <!-- Sidebar on the left with all the buttons -->
-    <div id="sidebar">
-        <button class="sidebar-button" id="mapButton">Map</button>
-        <button class="sidebar-button" id="filterButton">Filter</button>
-        <button class="sidebar-button">Graphs</button>
-        <button class="sidebar-button">Report</button>
-        <button class="sidebar-button">Export</button>
+    <div id="main">
+        <div id="header">
+            <div id="headertext">
+                <h1>SafeCity Toronto Crime Map</h1>
+            </div>
+        </div>
+    <div id="mainbody">
+        <div id="sidebar">
+        <div id="sidebar_buttons">
+            <button class="sidebar-button" id="mapButton">Map</button>
+            <button class="sidebar-button" id="filterButton">Filter</button>
+            <button class="sidebar-button">Graphs</button>
+            <button class="sidebar-button">Report</button>
+            <button class="sidebar-button">Export</button>
+        </div>
+    
     </div>
     <!-- Popup box for the filters. It will appear at the top of the sidebar-->
     <div id="filterBox" style="display: none;">
         <h3>Filters</h3>
         <label><input type="checkbox" id="neighborhoodCheckbox">Neighborhoods</label><br>
+        <label><input type="checkbox" id="neighborhoodCheckbox">Neighborhoods</label><br>
         <!-- Add more neighborhoods as needed -->
     </div>
     
-    <div id="display"></div> <!-- Display area -->
+    <div id="display"></div> <!-- Display area --></div> 
+    
+    </div>
+    
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
      crossorigin=""></script> <!-- Leaflet stuff (literally don't ask idk anything)-->
-    <script src="map.js"></script> <!-- Link to the map display -->
-    <script src="filters.js"></script> <!-- Link to the filters script file-->
-    
+    <script src="./scripts/map.js"></script> <!-- Link to the map display -->
+    <script src="./scripts/filters.js"></script> <!-- Link to the filters script file-->
+    <script src="./scripts/parseNeighbourhoodData.js"></script>
+    <script src="./scripts/Neighbourhood.js"></script>
+    <script src="./scripts/CrimeData.js"></script>
 </body>
 </html>

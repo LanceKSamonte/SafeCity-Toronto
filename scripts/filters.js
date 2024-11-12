@@ -17,15 +17,15 @@ neighborhoodCheckbox.addEventListener("change", (event) => {
         // check if works :)
         console.log("Neighborhoods filter is enabled");
         // load and display the neighborhood geojson data
-        fetch("./data/Neighbourhoods - 4326.geojson")
+        fetch("./data/neighbourhood-crime-rates - 4326.geojson")
             .then(response => response.json())
             .then(data => {
                 // add neighborhood geojson to the map 
                 neighborhoodLayer = L.geoJSON(data, {
                     style: {
-                        color: "blue",
-                        weight: 2,
-                        fillOpacity: 0.4
+                        color: "black",
+                        weight: 1,
+                        fillOpacity: 0.1
                     },
                     // leaflet function for the neighborhood information popups
                     onEachFeature: (feature, layer) => {
