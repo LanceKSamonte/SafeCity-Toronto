@@ -14,6 +14,7 @@ const to5000Checkbox = document.getElementById("to5000Checkbox");
 fetch("./data/neighbourhood-crime-rates - 4326.geojson")
     .then(response => response.json())
     .then(data => {
+        
         const neighbourhoods = parseNeighbourhoodData(data); // Array of Neighbourhood objects
 
         // Initialize Layer groups
@@ -56,6 +57,7 @@ fetch("./data/neighbourhood-crime-rates - 4326.geojson")
             if (event.target.checked) {
                 // Check if works :)
                 console.log("Neighborhoods filter is enabled");
+
                 // Create a layer group to hold all neighborhood polygons
                 neighborhoodLayer = L.layerGroup();
 
