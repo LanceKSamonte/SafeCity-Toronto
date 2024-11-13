@@ -95,7 +95,6 @@ body {
     overflow-y: auto;
     margin: 0;
     padding: 0;
-    padding-top: 20px;
     background-color: white;
 }
 
@@ -105,17 +104,17 @@ body {
     font-size: 16px;
     cursor: pointer;
     padding: 5px; 
-    margin-bottom: -15px;
     background-color: white; 
     border-bottom: 2px solid #ccc;
+    transition: background-color 0.2s ease, color 0.3s ease; /* Add color transition */
 }
-
 
 .checkbox input[type="checkbox"] {
     margin-right:20px;
     margin-top: 6px;
     transform: scale(1.2);
     accent-color: red;
+    
 }
 .checkbox input[type="checkbox"]:hover {
     cursor: pointer;
@@ -123,6 +122,7 @@ body {
 
 .checkbox:hover {
     color: red;
+    background-color: rgb(230, 230, 230);
 }
 
 .checkbox i{
