@@ -1,11 +1,16 @@
+/**
+ * Puts the GEOJson data into the neighbourhood class
+ * @param {JSON} jsonData 
+ * @returns 
+ */
 function parseNeighbourhoodData(jsonData) {
     const neighbourhoods = [];
 
     jsonData.features.forEach(feature => {
         const { _id, AREA_NAME, HOOD_ID, POPULATION_2023, ...crimeFields } = feature.properties;
-
+        const geometry = feature.geometry; // for the highlighting
         // Create a Neighbourhood object
-        const neighbourhood = new Neighbourhood(_id, AREA_NAME, HOOD_ID, POPULATION_2023);
+        const neighbourhood = new Neighbourhood(_id, AREA_NAME, HOOD_ID, POPULATION_2023, geometry);
 
         // Loop through each year and crime type to add CrimeData to Neighbourhood
         const years = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023];
@@ -31,16 +36,7 @@ function parseNeighbourhoodData(jsonData) {
         neighbourhoods.push(neighbourhood);
     });
 
+    //debugging purposes
     console.log(neighbourhoods);
     return neighbourhoods;
 }
-
-let moreData;
-console.log(moreData)
-
-fetch("./data/neighbourhood-crime-rates - 4326.geojson")
-            .then(response => response.json())
-            .then(data => {
-                parseNeighbourhoodData(data);
-            })
-            .catch(error => console.error("Error loading GeoJSON data:", error));
