@@ -10,35 +10,44 @@
     <link rel="stylesheet" href="style.css"> <!-- Link to the CSS file -->
 </head>
 <body>
-  
+    <div id="header">
+        <div id="headertext">
+            <h1>SafeCity Toronto Crime Map</h1>
+        </div>
+    </div>
     <!-- Sidebar on the left with all the buttons -->
     <div id="main">
-        <div id="header">
-            <div id="headertext">
-                <h1>SafeCity Toronto Crime Map</h1>
+        
+        <div id="mainbody">
+            <div id="sidebar">
+                <div id="sidebar_buttons">
+                    <ul>
+                        <li class="sidebar-button" id="mapButton"><a >Map</a></li>
+                        <li class="sidebar-button" id="filterButton"><a >Filter</a></li>
+                        <li class="sidebar-button"><a >Graphs</a></li>
+                        <li class="sidebar-button"><a >Report</a></li>
+                        <li class="sidebar-button"><a >Export</a></li>
+                    </ul>
+                </div>
+                <div id="filterBox">
+                    <h3>Filters</h3>
+                    <label><input type="checkbox" id="neighborhoodCheckbox">Neighborhoods</label><br>
+                    <label><input type="checkbox" id="assaultCheckbox">Assault</label><br>
+                    <label><input type="checkbox" id="autotheftCheckbox">Auto Theft</label><br>
+                    <label><input type="checkbox" id="biketheftCheckbox">Bike Theft</label><br>
+                    <label><input type="checkbox" id="bandeCheckbox">Break and Enter</label><br>
+                    <label><input type="checkbox" id="homicideCheckbox">Homicide</label><br>
+                    <label><input type="checkbox" id="robberyCheckbox">Robbery</label><br>
+                    <label><input type="checkbox" id="shootingCheckbox">Shooting</label><br>
+                    <label><input type="checkbox" id="tfmvCheckbox">Theft from Motor Vehicle</label><br>
+                    <label><input type="checkbox" id="to5000Checkbox">Theft over $5000</label><br>
+                </div>
             </div>
-        </div>
-    <div id="mainbody">
-        <div id="sidebar">
-        <div id="sidebar_buttons">
-            <button class="sidebar-button" id="mapButton">Map</button>
-            <button class="sidebar-button" id="filterButton">Filter</button>
-            <button class="sidebar-button">Graphs</button>
-            <button class="sidebar-button">Report</button>
-            <button class="sidebar-button">Export</button>
-        </div>
-    
-    </div>
-    <!-- Popup box for the filters. It will appear at the top of the sidebar-->
-    <div id="filterBox" style="display: none;">
-        <h3>Filters</h3>
-        <label><input type="checkbox" id="neighborhoodCheckbox">Neighborhoods</label><br>
-        <label><input type="checkbox" id="neighborhoodCheckbox">Neighborhoods</label><br>
-        <!-- Add more neighborhoods as needed -->
-    </div>
-    
-    <div id="display"></div> <!-- Display area --></div> 
-    
+            <!-- Popup box for the filters. It will appear at the top of the sidebar-->
+            
+        
+            <div id="display"></div> <!-- Display area --></div> 
+        </div> 
     </div>
     
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"

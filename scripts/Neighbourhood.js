@@ -11,21 +11,20 @@ class Neighbourhood {
      * @param {number} hoodId 
      * @param {number} population 
      */
-    constructor(id, name, hoodId, population) {
+    constructor(id, name, hoodId, population, geometry) {
         this.id = id;
         this.name = name;
         this.hoodId = hoodId;
         this.population = population;
+        this.geometry = geometry
         this.crimeDataList = [];
     }
 
+    /**
+     * adds crime data into neighbourhood class
+     * @param {object} crimeData 
+     */
     addCrimeData(crimeData) {
         this.crimeDataList.push(crimeData);
-    }
-
-    // Method to display neighborhood info (optional)
-    displayInfo() {
-        console.log(`Neighbourhood: ${this.name} (ID: ${this.id}), Population: ${this.population}`);
-        this.crimeDataList.forEach(data => console.log(data.toString()));
     }
 }
