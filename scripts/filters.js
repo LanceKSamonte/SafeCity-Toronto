@@ -115,6 +115,9 @@ fetch("./data/neighbourhood-crime-rates - 4326.geojson")
                     
                     // Debugging
                     console.log(`${crimeType} filter is enabled`);
+
+                    // Clear existing layer groups
+                    layerGroup.clearLayers();
                     
                     // Iterate through each neighborhood and display the polygons
                     neighbourhoods.forEach((neighbourhood) => {
