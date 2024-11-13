@@ -8,6 +8,13 @@
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
     crossorigin=""/> <!-- Leaflet stuff (literally don't ask idk anything)-->
     <link rel="stylesheet" href="style.css"> <!-- Link to the CSS file -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script> <!-- Leaflet stuff (literally don't ask idk anything)-->
+    <script src="https://kit.fontawesome.com/1214c3fe2d.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div id="header">
@@ -30,17 +37,16 @@
                     </ul>
                 </div>
                 <div id="filterBox">
-                    <h3>Filters</h3>
-                    <label><input type="checkbox" id="neighborhoodCheckbox">Neighborhoods</label><br>
-                    <label><input type="checkbox" id="assaultCheckbox">Assault</label><br>
-                    <label><input type="checkbox" id="autotheftCheckbox">Auto Theft</label><br>
-                    <label><input type="checkbox" id="biketheftCheckbox">Bike Theft</label><br>
-                    <label><input type="checkbox" id="bandeCheckbox">Break and Enter</label><br>
-                    <label><input type="checkbox" id="homicideCheckbox">Homicide</label><br>
-                    <label><input type="checkbox" id="robberyCheckbox">Robbery</label><br>
-                    <label><input type="checkbox" id="shootingCheckbox">Shooting</label><br>
-                    <label><input type="checkbox" id="tfmvCheckbox">Theft from Motor Vehicle</label><br>
-                    <label><input type="checkbox" id="to5000Checkbox">Theft over $5000</label><br>
+                    <label class="checkbox"><input type="checkbox" id="neighborhoodCheckbox">Neighborhoods<i class="fa-solid fa-house"></i></label><br>
+                    <label class="checkbox"><input type="checkbox" id="assaultCheckbox">Assault<i class="fa-solid fa-person-rifle"></i></label><br>
+                    <label class="checkbox"><input type="checkbox" id="autotheftCheckbox">Auto Theft<i class="fa-solid fa-car-side"></i></label><br>
+                    <label class="checkbox"><input type="checkbox" id="biketheftCheckbox">Bike Theft<i class="fa-solid fa-bicycle"></i></label><br>
+                    <label class="checkbox"><input type="checkbox" id="bandeCheckbox">Break and Enter<i class="fa-solid fa-person-through-window"></i></label><br>
+                    <label class="checkbox"><input type="checkbox" id="homicideCheckbox">Homicide<i class="fa-solid fa-skull"></i></label><br>
+                    <label class="checkbox"><input type="checkbox" id="robberyCheckbox">Robbery<i class="fa-solid fa-people-robbery"></i></label><br>
+                    <label class="checkbox"><input type="checkbox" id="shootingCheckbox">Shooting<i class="fa-solid fa-gun"></i></label><br>
+                    <label class="checkbox"><input type="checkbox" id="tfmvCheckbox">Theft from Motor Vehicle<i class="fa-solid fa-car"></i></label><br>
+                    <label class="checkbox"><input type="checkbox" id="to5000Checkbox">Theft over $5000<i class="fa-solid fa-money-bill"></i></label><br>
                 </div>
             </div>
             <!-- Popup box for the filters. It will appear at the top of the sidebar-->
@@ -50,9 +56,6 @@
         </div> 
     </div>
     
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-     crossorigin=""></script> <!-- Leaflet stuff (literally don't ask idk anything)-->
     <script src="./scripts/map.js"></script> <!-- Link to the map display -->
     <script src="./scripts/filters.js"></script> <!-- Link to the filters script file-->
     <script src="./scripts/parseNeighbourhoodData.js"></script>

@@ -40,3 +40,4 @@ function parseNeighbourhoodData(jsonData) {
     console.log(neighbourhoods);
     return neighbourhoods;
 }
+

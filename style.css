@@ -4,6 +4,8 @@ body {
     display: flex;
     flex-direction: column;
     height: 100dvh;
+    font-family: "Exo 2", sans-serif;
+    font-optical-sizing: auto;
 }
 
 #main{
@@ -30,26 +32,28 @@ body {
     background-color: #3f4762; 
 }
 
-#sidebar_buttons{
+#sidebar_buttons {
     position: relative;
-    display: block;
+    display: flex;
     background-color: white;
+    width: 100%;
 }
 
-#sidebar_buttons ul{
+#sidebar_buttons ul {
     list-style-type: none;
-    padding: 0px;
-    margin: 0px;
-    z-index: 1;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    width: 100%;
 }
 
-#sidebar_buttons li{
+#sidebar_buttons li {
     text-decoration: none;
     color: black;
-    padding: 18.45px;
-    display: inline-block;
+    padding: 20px; /* Adjusts padding for better fit */
     text-align: center;
-    box-shadow: inset 0 -2px 0 black; 
+    box-shadow: inset 0 -2px 0 black;
+    box-sizing: border-box; /* Ensures padding doesn’t exceed width */
 }
 
 .sidebar-button {
@@ -66,20 +70,13 @@ body {
     box-shadow: inset 0 -2px 0 red; 
 }
 
-#filterBox {
-    position: relative;
-    background-color: white;
-    border: 1px black;
-    padding: 15px;
-    z-index: 500; /* so it appears over the side bar */
-}
-
 #header{
-    background-color: #151f30;
+    background-color: rgb(225, 1, 1);
     padding: 10px;
 }
 
 #headertext{
+    padding: 2px;
     float: left;
     display: table;
 }
@@ -88,4 +85,48 @@ body {
     color: white;
     display: table-cell;
     vertical-align: middle;
+    font-size: 25px;
+}
+
+#filterBox {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow-y: auto;
+    margin: 0;
+    padding: 0;
+    padding-top: 20px;
+    background-color: white;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 5px; 
+    margin-bottom: -15px;
+    background-color: white; 
+    border-bottom: 2px solid #ccc;
+}
+
+
+.checkbox input[type="checkbox"] {
+    margin-right:20px;
+    margin-top: 6px;
+    transform: scale(1.2);
+    accent-color: red;
+}
+.checkbox input[type="checkbox"]:hover {
+    cursor: pointer;
+}
+
+.checkbox:hover {
+    color: red;
+}
+
+.checkbox i{
+    margin-left: auto; 
+    margin-right: 20px;
+    font-size: 1.2em; 
 }
