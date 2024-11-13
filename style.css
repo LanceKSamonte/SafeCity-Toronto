@@ -28,7 +28,7 @@ body {
 #sidebar {
     display: flex;
     flex-direction: column;
-    width: 35%; /* Width of the sidebar */
+    width: 60dvh; /* Width of the sidebar */
     background-color: #3f4762; 
 }
 
@@ -116,6 +116,7 @@ body {
     accent-color: red;
     
 }
+
 .checkbox input[type="checkbox"]:hover {
     cursor: pointer;
 }
