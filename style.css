@@ -21,22 +21,24 @@ body {
     height: 100%;
     background-color: #f0f0f0;
 }
+
 #display {
-    width: 100%; /* Width of the map container */
+    flex-grow: 1;
 }
 
 #sidebar {
     display: flex;
     flex-direction: column;
-    width: 60dvh; /* Width of the sidebar */
+    width: 25dvw; /* Width of the sidebar */
     background-color: #3f4762; 
+    flex-shrink: 0;
 }
 
 #sidebar_buttons {
-    position: relative;
     display: flex;
     background-color: white;
     width: 100%;
+    overflow-x: auto;
 }
 
 #sidebar_buttons ul {
@@ -52,6 +54,7 @@ body {
     color: black;
     padding: 20px; /* Adjusts padding for better fit */
     text-align: center;
+    flex: 1 1 0;
     box-shadow: inset 0 -2px 0 black;
     box-sizing: border-box; /* Ensures padding doesn’t exceed width */
 }
@@ -88,17 +91,15 @@ body {
     font-size: 25px;
 }
 
-#filterBox {
+#sidebar_content{
     display: flex;
     flex-direction: column;
     flex-grow: 1;
     overflow-y: auto;
-    margin: 0;
-    padding: 0;
     background-color: white;
 }
 
-.checkbox {
+.filterButton {
     display: flex;
     align-items: center;
     font-size: 16px;
@@ -109,7 +110,7 @@ body {
     transition: background-color 0.2s ease, color 0.3s ease; /* Add color transition */
 }
 
-.checkbox input[type="checkbox"] {
+.filterButton input[type="checkbox"] {
     margin-right:20px;
     margin-top: 6px;
     transform: scale(1.2);
@@ -117,16 +118,16 @@ body {
     
 }
 
-.checkbox input[type="checkbox"]:hover {
+.filterButton input[type="checkbox"]:hover {
     cursor: pointer;
 }
 
-.checkbox:hover {
+.filterButton:hover {
     color: red;
     background-color: rgb(230, 230, 230);
 }
 
-.checkbox i{
+.filterButton i{
     margin-left: auto; 
     margin-right: 20px;
     font-size: 1.2em; 
