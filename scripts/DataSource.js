@@ -1,19 +1,5 @@
 class DataSource{
-    constructor(geojson){
-        this.geojson = geojson;
-        this.getdata();
-    }
 
-    getdata(){
-        fetch(this.geojson)
-            .then(response => response.json())
-            .then(data => {
-                const neighbourhoods = this.parseNeighbourhoodData(data);
-                this.filterController = new FilterController(this.map, neighbourhoods);
-            })
-            .catch(error => console.error("Error loading GeoJSON data:", error));
-    }
-   
     parseNeighbourhoodData(jsonData) {
         const neighbourhoods = [];
     
@@ -51,6 +37,15 @@ class DataSource{
         console.log(neighbourhoods);
         return neighbourhoods;
     }    
+    
+    
 }
 
-const dataSource = new DataSource("./data/neighbourhood-crime-rates - 4326.geojson");
+fetch("./data/neighbourhood-crime-rates - 4326.geojson")
+            .then(response => response.json())
+            .then(data => {
+                const source = new DataSource();
+                const neighbourhoods = source.parseNeighbourhoodData(data);
+                const filterController = new FilterController(map, neighbourhoods);
+            })
+            .catch(error => console.error("Error loading GeoJSON data:", error));
