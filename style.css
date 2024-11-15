@@ -52,6 +52,10 @@ body {
     width: 100%;
 }
 
+#sidebar_buttons ul:hover{
+    overflow-x: auto;
+}
+
 #sidebar_buttons li {
     text-decoration: none;
     color: black;
