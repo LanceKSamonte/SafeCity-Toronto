@@ -1,5 +1,29 @@
+/**
+ * Class to get data from a geojson file and 
+ * create neighbourhood objects
+ */
 class DataSource{
 
+    // constructor to call getData function when creating DataSource object
+    constructor(){
+        this.getData();
+    }
+
+    // function to read geojson file 
+    async getData() {
+        try {
+            const response = await fetch("./data/neighbourhood-crime-rates - 4326.geojson");
+            const data = await response.json();
+    
+            const neighbourhoods = this.parseNeighbourhoodData(data);
+            this.filterController = new FilterController(map, neighbourhoods);
+
+        } catch (error) {
+            console.error("Error loading GeoJSON data:", error);
+        }
+    }
+
+    // Use data as Neighbourhood objects
     parseNeighbourhoodData(jsonData) {
         const neighbourhoods = [];
     
@@ -41,11 +65,5 @@ class DataSource{
     
 }
 
-fetch("./data/neighbourhood-crime-rates - 4326.geojson")
-            .then(response => response.json())
-            .then(data => {
-                const source = new DataSource();
-                const neighbourhoods = source.parseNeighbourhoodData(data);
-                const filterController = new FilterController(map, neighbourhoods);
-            })
-            .catch(error => console.error("Error loading GeoJSON data:", error));
+//init datasource
+const data_source = new DataSource();

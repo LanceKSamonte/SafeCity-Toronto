@@ -1,66 +1,66 @@
-// Toggle Filters
-document.getElementById("filterToggle").addEventListener("click", function() {
-    document.getElementById("filterContent").style.display = "block";
-    document.getElementById("graphsContent").style.display = "none";
-    document.getElementById("exportContent").style.display = "none";
-});
+/**
+ * Class to handle side bar button operations
+ */
+class SidebarButtonHandler {
+    /**
+     * Gets ID elements and creates event listeners for each element
+     * @param {HTMLElement} filterButtonId 
+     * @param {HTMLElement} graphsButtonId 
+     * @param {HTMLElement} exportButtonId 
+     */
+    constructor(filterButtonId, graphsButtonId, exportButtonId) {
+        this.filterButton = document.getElementById(filterButtonId);
+        this.graphsButton = document.getElementById(graphsButtonId);
+        this.exportButton = document.getElementById(exportButtonId);
 
-document.getElementById("graphsToggle").addEventListener("click", function() {
-    document.getElementById("filterContent").style.display = "none";
-    document.getElementById("graphsContent").style.display = "block";
-    document.getElementById("exportContent").style.display = "none";
-    
-    // Delay map initialization until the graphs content is visible
-    const mapContainer = document.getElementById('mapContainer'); // Assuming 'mapContainer' is your map container ID
-    if (mapContainer) {
-        if (!window.myMap) {  // Check if map is already initialized
-            window.myMap = L.map(mapContainer).setView([43.7, -79.42], 13);  // Example coordinates for Toronto
-            
-            // Add tile layer (this is an example, adjust to your use case)
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(window.myMap);
-        }
+        this.filterContent = document.getElementById("filterContent");
+        this.graphsContent = document.getElementById("graphsContent");
+        this.exportContent = document.getElementById("exportContent");
+
+        this.sidebar = document.getElementById('sidebar');
+        this.sidebarToggle = document.getElementById('sidebarToggle');
+
+        this.initializeListeners();
     }
 
-    // Initialize chart
-    const ctx = document.getElementById('myChart').getContext('2d');
-    window.myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Assault', 'Auto Theft', 'Bike Theft', 'Homicide', 'Robbery'],
-            datasets: [{
-                label: 'Number of Incidents',
-                data: [12, 19, 3, 5, 2],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-});
+    initializeListeners() {
+        // Toggle filters on click
+        this.filterButton.addEventListener("click", () => this.showFilters());
 
+        // Toggle fraphs on click
+        this.graphsButton.addEventListener("click", () => this.showGraphs());
 
-// Toggle Exports
-document.getElementById("exportToggle").addEventListener("click", function(){
-    document.getElementById("filterContent").style.display = "none";
-    document.getElementById("graphsContent").style.display = "none";
-    document.getElementById("exportContent").style.display = "block";  
-});
+        // Toggle exports on click
+        this.exportButton.addEventListener("click", () => this.showExports());
+        
+        this.sidebarToggle.addEventListener('click', function () {
+                sidebar.classList.toggle('visible');
+
+                setTimeout(() => {
+                    map.invalidateSize(); // Adjust the map to fit the new container dimensions
+                }, 500); // Matches the CSS transition duration (0.3s)
+        });
+    }
+
+    showFilters() {
+        this.filterContent.style.display = "block";
+        this.graphsContent.style.display = "none";
+        this.exportContent.style.display = "none";
+
+    }
+
+    showGraphs() {
+        this.filterContent.style.display = "none";
+        this.graphsContent.style.display = "block";
+        this.exportContent.style.display = "none";
+    }
+    showExports() {
+        this.filterContent.style.display = "none";
+        this.graphsContent.style.display = "none";
+        this.exportContent.style.display = "block";
+    }
+}
+
+// Instantiate the SidebarButtonHandler
+const sidebarHandler = new SidebarButtonHandler("filterToggle", "graphsToggle", "exportToggle");
+
