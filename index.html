@@ -20,11 +20,13 @@
 <body>
     <div id="header">
         <div id="headertext">
+            <button id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
             <h1>SafeCity Toronto Crime Map</h1>
         </div>
     </div>
     <div id="main">
         <div id="mainbody">
+             <!-- This button will trigger the sidebar slide -->
             <div id="sidebar"> <!-- Sidebar on the left with all the buttons -->
                 <div id="sidebar_buttons">
                     <ul>
@@ -47,20 +49,23 @@
                         <label class="filterButton"><input type="checkbox" id="to5000Checkbox">Theft over $5000<i class="fa-solid fa-money-bill"></i></label>
                     </div>
                     <div id="graphsContent" style="display: none">
-                        <p>Graphs go right here</p>
-                        <canvas id="myChart"></canvas>
+                        <p id="graphTutorial">Click on filters to see graphs</p>
+                       
                     </div>
                     <div id="exportContent" style="display: none">
-                        <p>Exports go right here</p>
+                        <h1>Data</h1><hr>
+                        <a href="./data/neighbourhood-crime-rates - 4326.geojson" class="exportDownload" download>neighbourhood-crime-rates - 4326.geojson<i class="fa-solid fa-file-arrow-down"></i></a>
+                        <a href="./data/Neighbourhoods - 4326.geojson" class="exportDownload" download>Neighbourhoods - 4326.geojson<i class="fa-solid fa-file-arrow-down"></i></a>
                     </div>
                 </div>
             </div>
             <div id="display"></div> <!-- Display area -->
         </div> 
     </div>
-    <script src="./scripts/filterController.js"></script> <!-- Link to the filters script file-->
+    <script src="./scripts/filterController.js"></script>
     <script src="./scripts/DataSource.js"></script>
-    <script src="./scripts/map.js"></script> <!-- Link to the map display -->
+    <script src="./scripts/Graphs.js"></script>
+    <script src="./scripts/map.js"></script> 
     <script src="./scripts/Neighbourhood.js"></script>
     <script src="./scripts/CrimeData.js"></script>
     <script src="./scripts/sidebarButtonHandler.js"></script>
