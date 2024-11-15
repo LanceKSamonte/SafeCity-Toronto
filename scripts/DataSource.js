@@ -4,7 +4,6 @@
  */
 class DataSource{
 
-    // constructor to call getData function when creating DataSource object
     constructor(){
         this.getData();
     }
@@ -16,7 +15,9 @@ class DataSource{
             const data = await response.json();
     
             const neighbourhoods = this.parseNeighbourhoodData(data);
+
             this.filterController = new FilterController(map, neighbourhoods);
+
 
         } catch (error) {
             console.error("Error loading GeoJSON data:", error);
@@ -67,3 +68,4 @@ class DataSource{
 
 //init datasource
 const data_source = new DataSource();
+
