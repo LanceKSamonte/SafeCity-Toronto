@@ -47,6 +47,7 @@ class Search {
             if (this.highlightedLayer) {
                 map.removeLayer(this.highlightedLayer);
                 this.highlightedLayer = null;
+                map.setView([43.693963, -79.377319], 11);
             }
         
             // show suggestions only if there are at least 2 characters typed
