@@ -3,7 +3,7 @@
  */
 class SidebarButtonHandler {
     /**
-     * Gets ID elements and creates event listeners for each element
+     * gets ID elements and creates event listeners for each element
      * @param {HTMLElement} filterButtonId 
      * @param {HTMLElement} graphsButtonId 
      * @param {HTMLElement} exportButtonId 
@@ -23,25 +23,32 @@ class SidebarButtonHandler {
         this.initializeListeners();
     }
 
+    /**
+     * function to add event listeners to each button
+     */
     initializeListeners() {
-        // Toggle filters on click
+        // toggle filters on click
         this.filterButton.addEventListener("click", () => this.showFilters());
 
-        // Toggle fraphs on click
+        // toggle graphs on click
         this.graphsButton.addEventListener("click", () => this.showGraphs());
 
-        // Toggle exports on click
+        // toggle exports on click
         this.exportButton.addEventListener("click", () => this.showExports());
         
+        // for that sweet ass sidebar animation 
         this.sidebarToggle.addEventListener('click', function () {
                 sidebar.classList.toggle('visible');
 
                 setTimeout(() => {
-                    map.invalidateSize(); // Adjust the map to fit the new container dimensions
-                }, 500); // Matches the CSS transition duration (0.3s)
+                    map.invalidateSize(); // adjust the map to fit the new container dimensions
+                }, 500); 
         });
     }
 
+    /**
+     * function to display the filters
+     */
     showFilters() {
         this.filterContent.style.display = "block";
         this.graphsContent.style.display = "none";
@@ -49,11 +56,18 @@ class SidebarButtonHandler {
 
     }
 
+    /**
+     * function to display the graphs
+     */
     showGraphs() {
         this.filterContent.style.display = "none";
         this.graphsContent.style.display = "block";
         this.exportContent.style.display = "none";
     }
+
+    /**
+     * function to display the exports
+     */
     showExports() {
         this.filterContent.style.display = "none";
         this.graphsContent.style.display = "none";
@@ -61,6 +75,6 @@ class SidebarButtonHandler {
     }
 }
 
-// Instantiate the SidebarButtonHandler
+// instantiate class
 const sidebarHandler = new SidebarButtonHandler("filterToggle", "graphsToggle", "exportToggle");
 

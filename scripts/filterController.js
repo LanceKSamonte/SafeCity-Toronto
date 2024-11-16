@@ -1,9 +1,19 @@
+/**
+ * class to handle the crime filters and map layers
+ */
 class FilterController {
+
+    /**
+     * constructor to initialize map, neighbourhoods, and other necessary elements
+     * @param {object} map - the map instance to display crime data on
+     * @param {array} neighbourhoods - the list of neighbourhood data for the city
+     */
     constructor(map, neighbourhoods) {
         this.map = map;
         this.neighbourhoods = neighbourhoods;
         this.charts = new Graphs();
-        // Initialize Layer groups
+
+        // initialize layer groups
         this.layerGroups = {
             "ASSAULT": L.layerGroup(),
             "AUTOTHEFT": L.layerGroup(),
@@ -17,7 +27,7 @@ class FilterController {
             "NEIGHBORHOODS": L.layerGroup()
         };
 
-        // Incident numbers for map coloring
+        // incident numbers for map coloring
         this.crimeMaxIncidents = {
             "ASSAULT": 500,
             "AUTOTHEFT": 400,
@@ -30,7 +40,7 @@ class FilterController {
             "THEFTOVER": 40
         };
 
-        // Initialize checkbox references
+        // initialize checkbox references
         this.checkboxElements = {
             "NEIGHBORHOODS": document.getElementById("neighborhoodCheckbox"),
             "ASSAULT": document.getElementById("assaultCheckbox"),
@@ -44,7 +54,7 @@ class FilterController {
             "THEFTOVER": document.getElementById("to5000Checkbox")
         };
 
-        // Initialize filters state to track active filters
+        // initialize filters state to track active filters
         this.filtersState = {
             "ASSAULT": false,
             "AUTOTHEFT": false,
@@ -57,16 +67,19 @@ class FilterController {
             "THEFTOVER": false
         };
 
-        // Attach event listeners to checkboxes
+        // attach event listeners to checkboxes
         this.initCheckboxHandlers();
     }
 
+    /**
+     * method to initialize checkbox handlers and bind events to filter layers
+     */
     initCheckboxHandlers() {
-        // Iterate over each crime type and bind checkbox event listeners
+        // iterate over each crime type and bind checkbox event listeners
         Object.keys(this.checkboxElements).forEach(crimeType => {
             this.checkboxElements[crimeType].addEventListener("change", (event) => {
                 const isChecked = event.target.checked;
-                this.filtersState[crimeType] = isChecked; // Update the filter state
+                this.filtersState[crimeType] = isChecked; 
 
                 if (crimeType === "NEIGHBORHOODS") {
                     this.toggleNeighborhoodLayer(isChecked);
@@ -77,6 +90,10 @@ class FilterController {
         });
     }
 
+    /**
+     * method to toggle the neighborhood layer on the map
+     * @param {boolean} isChecked - whether the neighborhood filter is enabled
+     */
     toggleNeighborhoodLayer(isChecked) {
         if (isChecked) {
             console.log("Neighborhoods filter is enabled");
@@ -111,6 +128,11 @@ class FilterController {
         }
     }
 
+    /**
+     * method to toggle crime layer on the map based on the selected crime type
+     * @param {string} crimeType - the type of crime to filter by
+     * @param {boolean} isChecked - whether the crime filter is enabled
+     */
     toggleCrimeLayer(crimeType, isChecked) {
         console.log(this.getActiveFilters());
         const layerGroup = this.layerGroups[crimeType];
@@ -124,6 +146,7 @@ class FilterController {
             layerGroup.clearLayers();
             this.charts.clearCharts();
 
+            // loops through each neighbourhood
             this.neighbourhoods.forEach((neighbourhood) => {
                 const { geometry, name, crimeDataList } = neighbourhood;
                 const coordinates = geometry.coordinates.map(polygon => 
@@ -135,6 +158,7 @@ class FilterController {
                 const latestCrimeData = crimeData.find(data => data.year === 2023);
                 const incidents = latestCrimeData ? latestCrimeData.incidents : 0;
 
+                // create a highlighted area from the coordinates of a neighbourhood
                 const polygon = L.polygon(coordinates, {
                     color: "black",
                     weight: 1,
@@ -152,7 +176,7 @@ class FilterController {
             this.generateCharts();
             
         } else {
-            console.log(`${crimeType} filter is disabled`);
+            console.log(`${crimeType} filter is disabled`); // debugging
             this.map.removeLayer(layerGroup);
             this.charts.clearCharts();
             const activeFilters = this.getActiveFilters();
@@ -166,6 +190,11 @@ class FilterController {
         }
     }
 
+    /**
+     * method to get the color for a specific crime type
+     * @param {string} crimeType - the type of crime
+     * @returns {string} color - the color associated with the crime type
+     */
     getCrimeColor(crimeType) {
         const colors = {
             "ASSAULT": "red",
@@ -181,12 +210,25 @@ class FilterController {
         return colors[crimeType] || "black";
     }
 
+    /**
+     * method to calculate the opacity for the fill color of a polygon
+     * @param {number} incidents - the number of incidents in the neighborhood
+     * @param {number} maxIncidents - the maximum number of incidents for the crime type
+     * @returns {number} opacity - the opacity of the polygon fill
+     */
     calculateFillOpacity(incidents, maxIncidents) {
         const minOpacity = 0.1;
         const maxOpacity = 0.8;
         return Math.min(maxOpacity, Math.max(minOpacity, (incidents / maxIncidents) * maxOpacity));
     }
 
+    /**
+     * method to generate popup content for a polygon
+     * @param {string} name - the name of the neighborhood
+     * @param {string} crimeType - the crime type being displayed
+     * @param {array} crimeData - the list of crime data for the neighborhood
+     * @returns {string} popupContent - the HTML content for the popup
+     */
     generatePopupContent(name, crimeType, crimeData) {
         const years = [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023];
         return `
@@ -202,6 +244,10 @@ class FilterController {
             </ul>
         `;
     }
+
+    /**
+     * method to generate crime charts based on the active filters
+     */
     generateCharts() {
         // Get the active filters using the getActiveFilters() method
         const activeFilters = this.getActiveFilters();
@@ -216,7 +262,12 @@ class FilterController {
         });
     }
     
-    // Method to get incident data for a specific crime type (this can be customized based on your data structure)
+    /**
+     * method to get the amount of incidents for each crime type in each year
+     * @param {string} crimeType 
+     * @param {array} years 
+     * @returns 
+     */
     getIncidentData(crimeType, years) {
         const incidents = years.map(year => {
             const crimeData = this.neighbourhoods.flatMap(neighbourhood => 
@@ -227,7 +278,10 @@ class FilterController {
         return incidents;
     }
 
-    // New method to get active filters
+    /**
+     * method to get all active filters as an array of crime types
+     * @returns {Array} activeFilters - the list of active crime filters
+     */
     getActiveFilters() {
         return Object.keys(this.filtersState).filter(crimeType => this.filtersState[crimeType]);
     }

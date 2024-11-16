@@ -1,25 +1,43 @@
+/**
+ * class to handle the crime graphs
+ */
 class Graphs{
 
+    // initialize chart array for chart creation/deletion
     constructor(){
         this.allCharts = [];
     }
     
+    /**
+     * method to add a new canvas to the graphs content div
+     * @param {string} canvasID - the id to assign to the new canvas element
+     */
     addCanvas(canvasID){
+        // get elements
         const graphsContentDiv = document.getElementById("graphsContent");
         const newCanvas = document.createElement("canvas");
         
+        //create a newCanvas with ID canvasID
         newCanvas.id = canvasID;
         newCanvas.className = "graphs";
         
         graphsContentDiv.appendChild(newCanvas)
-        console.log("yes");
     }
 
+    /**
+     * method to show charts with given data
+     * @param {string} chartName - the name of the chart to display
+     * @param {Array} incidents - the number of incidents for each year
+     * @param {Array} years - the years to be used as labels on the x-axis
+     */
     showCharts(chartName, incidents, years) {
-    
+        
+        // no chart for neighborhoods (there is lowkey a bug with this :( )
         if(chartName != "NEIGHBORHOODS"){
+            // add canvas for the chart if it does not exist
             this.addCanvas(chartName);
 
+            // create a chart with chart.js
             const ctx = document.getElementById(chartName).getContext('2d');
             const newChart = new Chart(ctx, {
                 type: 'bar',
@@ -71,16 +89,17 @@ class Graphs{
        
     }   
 
-    
-
+    /**
+     * method to clear all charts and canvas elements from the html page
+     */
     clearCharts() {
-        // Destroy each chart instance
+        // destroy each chart instance
         this.allCharts.forEach(chart => chart.destroy());
         
-        // Clear the chart array
+        // clear the chart array
         this.allCharts.length = 0;
     
-        // Remove all canvas elements from the DOM
+        // remove all canvas elements
         const canvasElements = document.querySelectorAll('canvas');
         canvasElements.forEach(canvas => canvas.remove());
     

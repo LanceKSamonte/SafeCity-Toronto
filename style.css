@@ -52,6 +52,10 @@ body {
     width: 100%;
 }
 
+#sidebar_buttons ul:hover{
+    overflow-x: auto;
+}
+
 #sidebar_buttons li {
     text-decoration: none;
     color: black;
@@ -79,6 +83,9 @@ body {
 #header{
     background-color: rgb(225, 1, 1);
     padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #headertext{
@@ -187,3 +194,65 @@ body {
     transition: color 0.2s ease;
     color: rgb(122, 122, 122);
 }
+
+#searchBox{
+    position: relative;
+}
+
+#searchBar {
+    width: 25dvw;
+    height: 100%;
+    background-color: rgb(213, 1, 1);
+    padding: 10px;
+    border-color: white;
+    color: white;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+#searchBar::placeholder{
+    color: white;
+    font-family: "Exo 2", sans-serif;
+    font-optical-sizing: auto;
+}
+
+#searchBar:hover::placeholder{
+    color: black;
+}
+
+#searchBar:hover, #searchBar:focus{
+    background-color: white;
+    color: black
+}
+
+#searchBar::-webkit-search-cancel-button {
+    cursor: pointer; 
+}
+
+#autocomplete{
+    position: absolute;  
+    top: 100%;           
+    left: 0;
+    width: 100%;      
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    z-index: 9000;
+    overflow-y: auto;
+    max-height: 53dvh;
+}
+
+#autocomplete li{
+    padding: 5px;
+    font-size: 0.9rem;
+}
+
+#autocomplete li:hover{
+    transition: color 0.2s ease, background-color 0.2s ease;
+    color: red;
+    background-color: rgb(230, 230, 230);
+    cursor: pointer;
+}
+
+
