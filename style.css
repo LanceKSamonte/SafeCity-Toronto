@@ -28,7 +28,7 @@ body {
 }
 
 #sidebar {
-    width: 26.7dvw; /* Width of the sidebar */
+    width: 26.7dvw; 
     background-color: #3f4762; 
     flex-shrink: 0;
     position: relative;
@@ -43,7 +43,7 @@ body {
 
 .sidebar-button {
     font-family: "Exo 2", sans-serif;
-    font-size: 2.3dvh;
+    font-size: 1.1rem;
     color: black;
     padding: 20px;
     text-align: center;
@@ -79,7 +79,7 @@ section h1{
     color: white;
     display: table-cell;
     vertical-align: middle;
-    font-size: 25px;
+    font-size: 1.8rem;
     padding-left: 30px;
 }
 
@@ -94,12 +94,12 @@ section h1{
 .filterButton {
     display: flex;
     align-items: center;
-    font-size: 15px;
+    font-size: 1rem;
     cursor: pointer;
     padding: 5px; 
     background-color: white; 
     border-bottom: 2px solid #ccc;
-    transition: background-color 0.2s ease, color 0.3s ease; /* Add color transition */
+    transition: background-color 0.2s ease, color 0.3s ease; 
 }
 
 .filterButton input[type="checkbox"] {
@@ -161,7 +161,7 @@ section h1{
     padding-right: 10px;
     padding-top: 6px;
     border: none;
-    font-size: 20px;
+    font-size: 30px;
     cursor: pointer;
     padding-top: 1  
 }
