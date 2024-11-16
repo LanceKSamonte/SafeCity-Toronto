@@ -3,44 +3,41 @@
 <head>
     <meta charset="utf-8">
     <title>SafeCity Toronto</title>
-    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="viewport" content="initial-scale=1">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""/> <!-- Leaflet stuff (literally don't ask idk anything)-->
+    crossorigin=""/>
     <link rel="stylesheet" href="style.css"> <!-- Link to the CSS file -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-     crossorigin=""></script> <!-- Leaflet stuff (literally don't ask idk anything)-->
+     crossorigin=""></script> 
     <script src="https://kit.fontawesome.com/1214c3fe2d.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div id="header">
-        <div id="headertext">
+    <header>
+        <section>
             <button id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
             <h1>SafeCity Toronto Crime Map</h1>
-        </div>
-        <div id="searchBox">
+        </section>
+        <section id="searchBox">
             <input id="searchBar" type="search" placeholder="Search Neighborhoods...">
             <ul id="autocomplete" style="display: none;">
             </ul>
-        </div>
-        
-    </div>
+        </section>
+    </header>
     <div id="main">
         <div id="mainbody">
              <!-- This button will trigger the sidebar slide -->
-            <div id="sidebar"> <!-- Sidebar on the left with all the buttons -->
-                <div id="sidebar_buttons">
-                    <ul>
-                        <li class="sidebar-button" id="filterToggle"><a >Filter</a></li>
-                        <li class="sidebar-button" id="graphsToggle"><a >Graphs</a></li>
-                        <li class="sidebar-button" id="exportToggle"><a >Export</a></li>
-                    </ul>
-                </div>
+            <aside id="sidebar"> <!-- Sidebar on the left with all the buttons -->
+                <nav id="sidebar_buttons">
+                    <button class="sidebar-button" id="filterToggle">Filter</button>
+                    <button class="sidebar-button" id="graphsToggle">Graphs</button>
+                    <button class="sidebar-button" id="exportToggle">Export</button>
+                </nav>
                 <div id="sidebar_content">
                     <div id="filterContent">
                         <label class="filterButton"><input type="checkbox" id="neighborhoodCheckbox">Neighborhoods<i class="fa-solid fa-house"></i></label>
@@ -56,7 +53,6 @@
                     </div>
                     <div id="graphsContent" style="display: none">
                         <p id="graphTutorial">Click on filters to see graphs</p>
-                       
                     </div>
                     <div id="exportContent" style="display: none">
                         <h1>Data</h1><hr>
@@ -64,7 +60,7 @@
                         <a href="./data/Neighbourhoods - 4326.geojson" class="exportDownload" download>Neighbourhoods - 4326.geojson<i class="fa-solid fa-file-arrow-down"></i></a>
                     </div>
                 </div>
-            </div>
+            </aside>
             <div id="display"></div> <!-- Display area -->
         </div> 
     </div>

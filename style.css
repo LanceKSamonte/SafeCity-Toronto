@@ -11,7 +11,7 @@ body {
 #main{
     margin: 0;
     padding: 0; 
-    height: 100%;
+    flex-grow: 1;
     overflow-y: hidden;
 }
 
@@ -28,12 +28,9 @@ body {
 }
 
 #sidebar {
-    display: flex;
-    flex-direction: column;
     width: 26.7dvw; /* Width of the sidebar */
     background-color: #3f4762; 
     flex-shrink: 0;
-    height: 100%;
     position: relative;
     transition: width 0.3s ease;
 }
@@ -41,46 +38,30 @@ body {
 #sidebar_buttons {
     display: flex;
     background-color: white;
-    flex-shrink: 1;
-}
-
-#sidebar_buttons ul {
-    list-style-type: none;
-    display: flex;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-}
-
-#sidebar_buttons ul:hover{
     overflow-x: auto;
 }
 
-#sidebar_buttons li {
-    text-decoration: none;
+.sidebar-button {
+    font-family: "Exo 2", sans-serif;
+    font-size: 2.3dvh;
     color: black;
-    padding: 20px; /* Adjusts padding for better fit */
+    padding: 20px;
     text-align: center;
     flex: 1 1 0;
     box-shadow: inset 0 -2px 0 black;
-    box-sizing: border-box; /* Ensures padding doesn’t exceed width */
-}
-
-.sidebar-button {
-    background-color: white; 
-    color: rgb(35, 34, 34);  
+    box-sizing: border-box;
+    background-color: white;
     border: none;
-    cursor: pointer; 
-    text-align: center;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease; /* Add color transition */
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
 }
 
-#sidebar_buttons li:hover {
+.sidebar-button:hover{
     color: red;
     box-shadow: inset 0 -2px 0 red; 
 }
 
-#header{
+header{
     background-color: rgb(225, 1, 1);
     padding: 10px;
     display: flex;
@@ -88,13 +69,13 @@ body {
     align-items: center;
 }
 
-#headertext{
+section{
     padding: 2px;
     float: left;
     display: table;
 }
 
-#headertext h1{
+section h1{
     color: white;
     display: table-cell;
     vertical-align: middle;
@@ -105,7 +86,7 @@ body {
 #sidebar_content{
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
+    height: 100%;
     overflow-y: auto;
     background-color: white;
 }
@@ -113,7 +94,7 @@ body {
 .filterButton {
     display: flex;
     align-items: center;
-    font-size: 16px;
+    font-size: 15px;
     cursor: pointer;
     padding: 5px; 
     background-color: white; 
@@ -126,7 +107,6 @@ body {
     margin-top: 6px;
     transform: scale(1.2);
     accent-color: red;
-    
 }
 
 .filterButton input[type="checkbox"]:hover {
@@ -197,6 +177,10 @@ body {
 
 #searchBox{
     position: relative;
+    width: 25dvw;
+    margin: 0;
+    padding: 0;
+    display: flex;
 }
 
 #searchBar {
