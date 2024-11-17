@@ -12,7 +12,7 @@ body {
     margin: 0;
     padding: 0; 
     flex-grow: 1;
-    overflow-y: hidden;
+    overflow-y: auto;
 }
 
 #mainbody{
@@ -29,16 +29,18 @@ body {
 
 #sidebar {
     width: 26.7dvw; 
-    background-color: #3f4762; 
-    flex-shrink: 0;
+    height: 100%;
     position: relative;
     transition: width 0.3s ease;
+    display: flex;
+    flex-direction: column;
 }
 
 #sidebar_buttons {
     display: flex;
     background-color: white;
     overflow-x: auto;
+    height: 10dvh;
 }
 
 .sidebar-button {
@@ -84,8 +86,6 @@ section h1{
 }
 
 #sidebar_content{
-    display: flex;
-    flex-direction: column;
     height: 100%;
     overflow-y: auto;
     background-color: white;
@@ -125,8 +125,7 @@ section h1{
 }
 
 #graphsContent{
-    margin: 10px;
-    padding: px;
+    padding: 20px;
 }
 
 #exportContent{
@@ -239,4 +238,13 @@ section h1{
     cursor: pointer;
 }
 
-
+ /* for mobile*/
+@media only screen and (max-width: 620px) {
+   #sidebar{
+    width: 100dvw;
+   }
+   
+   #graphsContent{
+    width: 90%;
+   }
+}
