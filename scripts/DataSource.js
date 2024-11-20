@@ -8,19 +8,57 @@ class DataSource{
      */
     async getData() {
         try {
-            const response = await fetch("./data/neighbourhood-crime-rates - 4326.geojson");
-            const data = await response.json();
+            // Retrieve the package information from the API using fetch
+            const packageResponse = await fetch('https://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action/package_show?id=neighbourhood-crime-rates');
+            const packageData = await packageResponse.json();
+            
+            // Get the datastore resources for the package
+            let datastoreResources = packageData["result"]["resources"].filter(r => r.datastore_active);
     
+            // Ensure there's at least one active datastore resource
+            if (datastoreResources.length === 0) {
+                throw new Error("No active datastore resources found");
+            }
+    
+            // Retrieve the data from the datastore, with pagination
+            const data = await this.getDatastoreResource(datastoreResources[0]);
+    
+            // Once all data is retrieved, pass it to the filter controller
             const neighbourhoods = this.parseNeighbourhoodData(data);
 
             this.filterController = new FilterController(map, neighbourhoods);
 
+            console.log(neighbourhoods); // Log the neighbourhoods data for debugging
 
         } catch (error) {
-            console.error("Error loading GeoJSON data:", error);
+            console.error("Error loading data:", error);
         }
     }
-
+    
+    // Function to get datastore resource with pagination support
+    async getDatastoreResource(resource) {
+        const records = [];
+        let offset = 0;
+        const limit = 100; // Default limit for pagination
+    
+        while (true) {
+            const response = await fetch(`https://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action/datastore_search?id=${resource["id"]}&limit=${limit}&offset=${offset}`);
+            const responseData = await response.json();
+            
+            // Accumulate the records
+            records.push(...responseData["result"]["records"]);
+    
+            // Check if we have received fewer records than the limit (indicating we're at the last page)
+            if (responseData["result"]["records"].length < limit) {
+                break; // No more data, stop fetching
+            } else {
+                offset += limit; // Increase the offset to fetch the next page
+            }
+        }
+    
+        return records;
+    }
+    
     /**
      * function to parse geojson data and create Neighbourhood objects
      * @param {object} jsonData - the parsed geojson data
@@ -29,8 +67,8 @@ class DataSource{
     parseNeighbourhoodData(jsonData) {
         const neighbourhoods = [];
     
-        jsonData.features.forEach(feature => {
-            const { _id, AREA_NAME, HOOD_ID, POPULATION_2023, ...crimeFields } = feature.properties;
+        jsonData.forEach(feature => {
+            const { _id, AREA_NAME, HOOD_ID, POPULATION_2023, ...crimeFields } = feature;
             const geometry = feature.geometry; // for the highlighting
             // Create a Neighbourhood object
             const neighbourhood = new Neighbourhood(_id, AREA_NAME, HOOD_ID, POPULATION_2023, geometry);
@@ -59,9 +97,7 @@ class DataSource{
             neighbourhoods.push(neighbourhood);
         });
         return neighbourhoods;
-    }    
-    
-    
+    }     
 }
 
 //init datasource

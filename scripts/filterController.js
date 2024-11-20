@@ -100,9 +100,16 @@ class FilterController {
             this.layerGroups["NEIGHBORHOODS"].clearLayers();
 
             this.neighbourhoods.forEach((neighbourhood) => {
-                const { geometry, name, id, population, hoodId } = neighbourhood;
+                const { name, id, population, hoodId } = neighbourhood;
+                let geometry;
+                try {
+                    geometry = JSON.parse(neighbourhood.geometry);
+                } catch (error) {
+                    console.error("Failed to parse geometry for neighbourhood:", neighbourhood, error);
+                }
+
                 const coordinates = geometry.coordinates.map(polygon => 
-                    polygon.map(coords => coords.map(point => [point[1], point[0]]))
+                    polygon.map(point => [point[1], point[0]])
                 );
 
                 const polygon = L.polygon(coordinates, {
@@ -148,9 +155,15 @@ class FilterController {
 
             // loops through each neighbourhood
             this.neighbourhoods.forEach((neighbourhood) => {
-                const { geometry, name, crimeDataList } = neighbourhood;
+                const { name, crimeDataList } = neighbourhood;
+                let geometry;
+                try {
+                    geometry = JSON.parse(neighbourhood.geometry);
+                } catch (error) {
+                    console.error("Failed to parse geometry for neighbourhood:", neighbourhood, error);
+                }
                 const coordinates = geometry.coordinates.map(polygon => 
-                    polygon.map(coords => coords.map(point => [point[1], point[0]]))
+                    polygon.map(point => [point[1], point[0]])
                 );
 
                 const crimeData = crimeDataList.filter(data => data.type === crimeType);

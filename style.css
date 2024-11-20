@@ -190,12 +190,12 @@ section h1{
     border-color: white;
     color: white;
     transition: color 0.2s ease, background-color 0.2s ease;
+    font-family: "Exo 2", sans-serif;
+    font-optical-sizing: auto;
 }
 
 #searchBar::placeholder{
     color: white;
-    font-family: "Exo 2", sans-serif;
-    font-optical-sizing: auto;
 }
 
 #searchBar:hover::placeholder{

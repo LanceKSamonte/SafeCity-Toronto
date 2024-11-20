@@ -21,11 +21,19 @@ class Search {
      */
     async getSearchData() {
         try {
-            const response = await fetch("./data/neighbourhood-crime-rates - 4326.geojson");
-            const data = await response.json();
-            
+            const packageResponse = await fetch('https://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action/package_show?id=neighbourhood-crime-rates');
+            const packageData = await packageResponse.json();
+            let datastoreResources = packageData["result"]["resources"].filter(r => r.datastore_active);
+    
+            // Ensure there's at least one active datastore resource
+            if (datastoreResources.length === 0) {
+                throw new Error("No active datastore resources found");
+            }
+    
             // Parse the neighborhood data and extract all relevant information into objects
+            
             const neighbourhoods = new DataSource();
+            const data = await neighbourhoods.getDatastoreResource(datastoreResources[0]);
             this.allNeighbourhoods = neighbourhoods.parseNeighbourhoodData(data); // passes the neighbourhood objects into allNeighbourhoods
         } catch (error) {
             console.error("Error loading GeoJSON data:", error);
@@ -87,7 +95,14 @@ class Search {
      */
     highlightGeometry(neighbourhood) {
         // highlight the coordinates 
-        const geoJsonLayer = L.geoJSON(neighbourhood.geometry).addTo(map);
+        let geometry;
+        try {
+            geometry = JSON.parse(neighbourhood.geometry);
+        } catch (error) {
+            console.error("Failed to parse geometry for neighbourhood:", neighbourhood, error);
+        }
+
+        const geoJsonLayer = L.geoJSON(geometry).addTo(map);
         
         // bind a popup with the name and population
         geoJsonLayer.bindPopup(`<strong>${neighbourhood.name}</strong><br>Population: ${neighbourhood.population}`).openPopup();
