@@ -2,7 +2,7 @@
  * class to get data from a geojson file and create neighbourhood objects
  */
 class DataSource{
-
+  
     /**
      * method to read geoJson file
      */
@@ -25,10 +25,11 @@ class DataSource{
     
             // Once all data is retrieved, pass it to the filter controller
             const neighbourhoods = this.parseNeighbourhoodData(data);
+
             this.filterController = new FilterController(map, neighbourhoods);
-    
+
             console.log(neighbourhoods); // Log the neighbourhoods data for debugging
-    
+
         } catch (error) {
             console.error("Error loading data:", error);
         }
@@ -102,3 +103,4 @@ class DataSource{
 //init datasource
 const data_source = new DataSource();
 data_source.getData();
+
