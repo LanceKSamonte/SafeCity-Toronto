@@ -7,21 +7,50 @@ class DataSource{
      * method to read geoJson file
      */
     async getData() {
-        try {
-            // Retrieve the package information from the API using fetch
-            const packageResponse = await fetch('https://safecity-toronto.onrender.com/api/neighbourhoods');
-            const packageData = await packageResponse.json();
+        const SERVER_URL = 'https://safecity-toronto.onrender.com/api/neighbourhoods';
 
-            // Once all data is retrieved, pass it to the filter controller
+        try {
+            // Fetch from server with timeout
+            const packageResponse = await this.fetchWithTimeout(SERVER_URL, 3000); // 5-second timeout
+            if (!packageResponse.ok) {
+                
+                throw new Error(`Server response not ok: ${packageResponse.status}`);
+            }
+            const packageData = await packageResponse.json();
+    
+            // Process data and initialize FilterController
             const neighbourhoods = this.parseNeighbourhoodData(packageData);
             this.filterController = new FilterController(map, neighbourhoods);
     
             console.log(neighbourhoods); // Log the neighbourhoods data for debugging
     
         } catch (error) {
-            console.error("Error loading data:", error);
+            alert("Please note: The server may take up to 1 minute to respond if it's currently inactive. Try reloading after 1 minute");
+            console.error("Error loading data from server", error);
         }
     }
+    
+    // Helper function to add timeout to fetch
+    async fetchWithTimeout(url, timeout) {
+        const controller = new AbortController();
+        const signal = controller.signal;
+    
+        // Set a timeout to abort the request
+        const timeoutId = setTimeout(() => controller.abort(), timeout);
+    
+        try {
+            const response = await fetch(url, { signal });
+            return response;
+        } catch (error) {
+            if (error.name === 'AbortError') {
+                throw new Error(`Request to ${url} timed out`);
+            }
+            throw error;
+        } finally {
+            clearTimeout(timeoutId); // Clear the timeout
+        }
+    }
+    
     
     // Function to get datastore resource with pagination support
     async getDatastoreResource(resource) {
