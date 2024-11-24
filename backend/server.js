@@ -1,16 +1,15 @@
 import express from "express";
-import fetch from "node-fetch"; // Use `import` instead of `require`
+import fetch from "node-fetch";
 import cors from "cors";
 
 class NeighbourhoodApiServer {
-  constructor(port) {
-    this.port = port;
+  constructor() {
     this.app = express();
     this.setupMiddleware();
     this.setupRoutes();
   }
 
-  // Setup middleware such as CORS
+  // Setup middleware such as CORS and static file serving
   setupMiddleware() {
     this.app.use(cors());
   }
@@ -22,14 +21,15 @@ class NeighbourhoodApiServer {
 
   // Start the server
   start() {
-    this.app.listen(this.port, () => {
-      console.log(`Server is running on http://localhost:${this.port}`);
+    const port = process.env.PORT || 8000; // Use dynamic port for Render
+    this.app.listen(port, () => {
+      console.log(`Server is running on port ${port}`);
     });
   }
 
   // Route handler for /api/neighbourhoods
   async handleNeighbourhoodRequest(req, res) {
-    console.log("Request received at /api/neighbourhoods");
+    console.log("Request received");
     try {
       const packageResponse = await fetch(
         'https://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action/package_show?id=neighbourhood-crime-rates'
@@ -81,5 +81,5 @@ class NeighbourhoodApiServer {
 }
 
 // Instantiate and start the server
-const server = new NeighbourhoodApiServer(5500);
+const server = new NeighbourhoodApiServer();
 server.start();
