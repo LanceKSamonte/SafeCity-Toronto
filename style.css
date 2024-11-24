@@ -1,43 +1,295 @@
 body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Full viewport height */
-    background-color: #f0f0f0; 
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  font-family: "Exo 2", sans-serif;
+  font-optical-sizing: auto;
 }
-#map {
-    width: 60%; /* Width of the map container */
-    height: 80%; /* Height of the map container */
-    border: 1px solid #505050; /* border */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* slight shadow cuz cool */
+
+#main {
+  margin: 0;
+  padding: 0;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+#mainbody {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  height: 100%;
+  background-color: #f0f0f0;
+}
+
+#display {
+  flex-grow: 1;
 }
 
 #sidebar {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 200px; /* Width of the sidebar */
-    height: 80%; /* Height matches map*/
-    background-color: #636363; 
-    padding-right: 5px;
-    padding-left: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* slight shadow cuz cool */
-    border-left: 2px solid #505050; 
-    border-top: 2px solid #505050; 
+  width: 26.7dvw;
+  height: 100%;
+  position: relative;
+  transition: width 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+#sidebar_buttons {
+  display: flex;
+  background-color: white;
+  overflow-x: auto;
+  height: 10dvh;
 }
 
 .sidebar-button {
-    background-color: #e0e0e0; 
-    color: rgb(35, 34, 34);  
-    padding: 10px; 
-    margin-bottom: 10px;
-    border-radius: 5px; 
-    cursor: pointer; 
+  font-family: "Exo 2", sans-serif;
+  font-size: 1.1rem;
+  color: black;
+  padding: 20px;
+  text-align: center;
+  flex: 1 1 0;
+  box-shadow: inset 0 -2px 0 black;
+  box-sizing: border-box;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
 }
 
 .sidebar-button:hover {
-    background-color: #9d9e9f; /* Darker shade on hover */
+  color: red;
+  box-shadow: inset 0 -2px 0 red;
 }
 
+header {
+  background-color: rgb(225, 1, 1);
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+section {
+  padding: 2px;
+  float: left;
+  display: table;
+}
+
+section h1 {
+  color: white;
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 1.8rem;
+  padding-left: 30px;
+}
+
+#sidebar_content {
+  height: 100%;
+  overflow-y: auto;
+  background-color: white;
+}
+
+.filterButton {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 5px;
+  background-color: white;
+  border-bottom: 2px solid #ccc;
+  transition: background-color 0.2s ease, color 0.3s ease;
+}
+
+.filterButton input[type="checkbox"] {
+  margin-right: 20px;
+  margin-top: 6px;
+  transform: scale(1.2);
+  accent-color: red;
+}
+
+.filterButton input[type="checkbox"]:hover {
+  cursor: pointer;
+}
+
+.filterButton:hover {
+  color: red;
+  background-color: rgb(230, 230, 230);
+}
+
+.filterButton i {
+  margin-left: auto;
+  margin-right: 20px;
+  font-size: 1.2em;
+}
+
+#graphsContent {
+  padding: 20px;
+}
+
+#exportContent {
+  margin: 10px;
+  padding: 5px;
+}
+
+.exportDownload {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px;
+  color: blue;
+  text-decoration: none;
+}
+
+.exportDownload:hover {
+  transition: background-color 0.2s ease, color 0.3s ease;
+  color: red;
+  cursor: pointer;
+}
+
+.exportDownload i {
+  padding-left: 10px;
+  margin-left: auto;
+  font-size: 1.2em;
+}
+
+#sidebarToggle {
+  background-color: transparent;
+  color: white;
+  padding-right: 10px;
+  padding-top: 6px;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  padding-top: 1;
+}
+
+#sidebar.visible {
+  width: 0px;
+}
+
+#sidebarToggle:hover {
+  transition: color 0.2s ease;
+  color: rgb(122, 122, 122);
+}
+
+#searchBox {
+  position: relative;
+  width: 25dvw;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+#searchBox-llm {
+  position: relative;
+  width: 25dvw;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+#searchBar {
+  width: 25dvw;
+  height: 100%;
+  background-color: rgb(213, 1, 1);
+  padding: 10px;
+  border-color: white;
+  color: white;
+  transition: color 0.2s ease, background-color 0.2s ease;
+  font-family: "Exo 2", sans-serif;
+  font-optical-sizing: auto;
+}
+
+#searchBar::placeholder {
+  color: white;
+}
+
+#searchBar:hover::placeholder {
+  color: black;
+}
+
+#searchBar:hover,
+#searchBar:focus {
+  background-color: white;
+  color: black;
+}
+
+#searchBar::-webkit-search-cancel-button {
+  cursor: pointer;
+}
+
+#searchBar-llm {
+  width: 25dvw;
+  height: 100%;
+  padding: 10px;
+  border-color: black;
+  color: black;
+  transition: color 0.2s ease, background-color 0.2s ease;
+  font-family: "Exo 2", sans-serif;
+  font-optical-sizing: auto;
+}
+
+#searchBar-llm:hover,
+#searchBar-llm:focus {
+  background-color: white;
+  color: black;
+}
+
+#searchBar-llm::-webkit-search-cancel-button {
+  cursor: pointer;
+}
+
+#autocomplete {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  z-index: 9000;
+  overflow-y: auto;
+  max-height: 53dvh;
+}
+
+#autocomplete li {
+  padding: 5px;
+  font-size: 0.9rem;
+}
+
+#autocomplete li:hover {
+  transition: color 0.2s ease, background-color 0.2s ease;
+  color: red;
+  background-color: rgb(230, 230, 230);
+  cursor: pointer;
+}
+
+#llm-answer {
+  position: absolute;
+  top: 150%;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  list-style-type: none;
+  padding: 8px;
+  margin: 0;
+  z-index: 9000;
+  overflow-y: auto;
+  max-height: 53dvh;
+}
+
+/* for mobile*/
+@media only screen and (max-width: 620px) {
+  #sidebar {
+    width: 100dvw;
+  }
+
+  #graphsContent {
+    width: 90%;
+  }
+}
