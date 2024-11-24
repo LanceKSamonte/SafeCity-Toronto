@@ -9,7 +9,7 @@ class DataSource{
     async getData() {
         try {
             // Retrieve the package information from the API using fetch
-            const packageResponse = await fetch('http://localhost:5500/api/neighbourhoods');
+            const packageResponse = await fetch('https://safecity-toronto.onrender.com/api/neighbourhoods');
             const packageData = await packageResponse.json();
 
             // Once all data is retrieved, pass it to the filter controller
