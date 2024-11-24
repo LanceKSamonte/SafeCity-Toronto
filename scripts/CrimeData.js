@@ -1,7 +1,4 @@
-/**
- * CrimeData class containing the type of crime,
- *year, amount of incidents, and crime rate
- */
+// CrimeData.js (using ES modules syntax)
 class CrimeData {
     /**
      * Constructs a CrimeData object

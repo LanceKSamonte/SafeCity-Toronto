@@ -14,6 +14,7 @@ class Search {
 
         this.getSearchData();  // Fetch the data when the class is initialized
         this.searchFunction();  // Set up the search functionality
+        this.initializeSearchbarLlm();
     }
 
     /**
@@ -21,20 +22,11 @@ class Search {
      */
     async getSearchData() {
         try {
-            const packageResponse = await fetch('https://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action/package_show?id=neighbourhood-crime-rates');
+            const packageResponse = await fetch('http://localhost:5500/api/neighbourhoods');
             const packageData = await packageResponse.json();
-            let datastoreResources = packageData["result"]["resources"].filter(r => r.datastore_active);
     
-            // Ensure there's at least one active datastore resource
-            if (datastoreResources.length === 0) {
-                throw new Error("No active datastore resources found");
-            }
-    
-            // Parse the neighborhood data and extract all relevant information into objects
-            
             const neighbourhoods = new DataSource();
-            const data = await neighbourhoods.getDatastoreResource(datastoreResources[0]);
-            this.allNeighbourhoods = neighbourhoods.parseNeighbourhoodData(data); // passes the neighbourhood objects into allNeighbourhoods
+            this.allNeighbourhoods = neighbourhoods.parseNeighbourhoodData(packageData); // passes the neighbourhood objects into allNeighbourhoods
         } catch (error) {
             console.error("Error loading GeoJSON data:", error);
         }
@@ -88,6 +80,41 @@ class Search {
             } 
         });
     }    
+
+    initializeSearchbarLlm() {
+        this.searchBar_llm = document.getElementById("searchBar-llm");
+        if (this.searchBar_llm) {
+          this.searchBar_llm.addEventListener("keypress", function (event) {
+            // Check if the Enter key is pressed
+            if (event.key === "Enter") {
+              event.preventDefault(); // Prevent the default form submission behavior
+    
+              const inputValue = event.target.value.trim(); // Get the input value
+              if (inputValue) {
+                fetch("https://038f-34-125-53-35.ngrok-free.app/query", {
+                  method: "POST", // HTTP method
+                  headers: {
+                    "Content-Type": "application/json", // Set content type to JSON
+                  },
+                  body: JSON.stringify({ question: inputValue }), // Stringify the body with the question
+                })
+                  .then((response) => response.json())
+                  .then((response) => {
+                    this.llm_answer = document.getElementById("llm-answer");
+                    this.llm_answer.innerHTML = "";
+                    this.llm_answer.style.display = "block";
+                    this.llm_answer.textContent = response.answer;
+                    // this.llm_answer.appendChild(li);
+                  });
+              } else {
+                console.log("Searchbar is empty!");
+              }
+            }
+          });
+        } else {
+          console.error('Element with ID "searchbar-llm" not found.');
+        }
+    }
 
     /**
      * function to highlight the searched neighbourhood and show popups

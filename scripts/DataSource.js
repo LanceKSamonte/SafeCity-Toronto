@@ -9,22 +9,11 @@ class DataSource{
     async getData() {
         try {
             // Retrieve the package information from the API using fetch
-            const packageResponse = await fetch('https://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action/package_show?id=neighbourhood-crime-rates');
+            const packageResponse = await fetch('http://localhost:5500/api/neighbourhoods');
             const packageData = await packageResponse.json();
-            
-            // Get the datastore resources for the package
-            let datastoreResources = packageData["result"]["resources"].filter(r => r.datastore_active);
-    
-            // Ensure there's at least one active datastore resource
-            if (datastoreResources.length === 0) {
-                throw new Error("No active datastore resources found");
-            }
-    
-            // Retrieve the data from the datastore, with pagination
-            const data = await this.getDatastoreResource(datastoreResources[0]);
-    
+
             // Once all data is retrieved, pass it to the filter controller
-            const neighbourhoods = this.parseNeighbourhoodData(data);
+            const neighbourhoods = this.parseNeighbourhoodData(packageData);
             this.filterController = new FilterController(map, neighbourhoods);
     
             console.log(neighbourhoods); // Log the neighbourhoods data for debugging
