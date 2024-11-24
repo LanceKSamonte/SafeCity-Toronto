@@ -21,3 +21,5 @@ https://leafletjs.com/
 
 ### Data is taken from Toronto's open data catalogue
 https://open.toronto.ca/
+<hr><br>
+The server is hosted on Render so the data may take a while to show up if no one is using the website
