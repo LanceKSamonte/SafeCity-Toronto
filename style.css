@@ -28,7 +28,7 @@ body {
   }
   
   #sidebar {
-    width: 26.7dvw;
+    width: 400px;
     height: 100%;
     position: relative;
     transition: width 0.3s ease;
