@@ -88,10 +88,3 @@ class SidebarButtonHandler {
     }
   }
   
-  // instantiate class
-  const sidebarHandler = new SidebarButtonHandler(
-    "filterToggle",
-    "graphsToggle",
-    "exportToggle",
-    "askToggle"
-  );

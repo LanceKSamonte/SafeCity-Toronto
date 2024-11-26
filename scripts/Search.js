@@ -142,4 +142,3 @@ class Search {
     }
 }
 
-const search = new Search();  // instantiate class

@@ -117,6 +117,3 @@ class DataSource{
     }     
 }
 
-//init datasource
-const data_source = new DataSource();
-data_source.getData();
