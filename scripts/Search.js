@@ -22,7 +22,7 @@ class Search {
      */
     async getSearchData() {
         try {
-            const packageResponse = await fetch('https://safecity-toronto.l5.ca/api/neighbourhoods');
+            const packageResponse = await fetch('http://localhost:8000/api/neighbourhoods');
             const packageData = await packageResponse.json();
     
             const neighbourhoods = new DataSource();
@@ -91,7 +91,7 @@ class Search {
     
               const inputValue = event.target.value.trim(); // Get the input value
               if (inputValue) {
-                fetch("https://038f-34-125-53-35.ngrok-free.app/query", {
+                fetch("https://76ea-34-87-156-117.ngrok-free.app/query", {
                   method: "POST", // HTTP method
                   headers: {
                     "Content-Type": "application/json", // Set content type to JSON
