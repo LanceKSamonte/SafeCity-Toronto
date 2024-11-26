@@ -7,7 +7,7 @@ class DataSource{
      * method to read geoJson file
      */
     async getData() {
-        const SERVER_URL = 'https://safecity-toronto.onrender.com/api/neighbourhoods';
+        const SERVER_URL = 'http://3.23.112.16:8000/api/neighbourhoods';
 
         try {
             // Fetch from server with timeout
@@ -25,7 +25,7 @@ class DataSource{
             console.log(neighbourhoods); // Log the neighbourhoods data for debugging
     
         } catch (error) {
-            alert("Please note: The server may take up to 1 minute to respond if it's currently inactive. Try reloading after 1 minute");
+            alert("Server may be down");
             console.error("Error loading data from server", error);
         }
     }
