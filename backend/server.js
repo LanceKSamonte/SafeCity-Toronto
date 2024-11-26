@@ -22,7 +22,7 @@ class NeighbourhoodApiServer {
   // Start the server
   start() {
     const port = process.env.PORT || 8000; // Use dynamic port for Render
-    this.app.listen(port, () => {
+    this.app.listen(port, '0.0.0.0', () => {
       console.log(`Server is running on port ${port}`);
     });
   }
@@ -83,3 +83,4 @@ class NeighbourhoodApiServer {
 // Instantiate and start the server
 const server = new NeighbourhoodApiServer();
 server.start();
+ 
