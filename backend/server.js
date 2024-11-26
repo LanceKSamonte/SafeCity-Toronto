@@ -1,6 +1,8 @@
 import express from "express";
 import fetch from "node-fetch";
 import cors from "cors";
+import https from "https";
+import fs from "fs";
 
 class NeighbourhoodApiServer {
   constructor() {
@@ -21,9 +23,23 @@ class NeighbourhoodApiServer {
 
   // Start the server
   start() {
-    const port = process.env.PORT || 8000; // Use dynamic port for Render
-    this.app.listen(port, '0.0.0.0', () => {
-      console.log(`Server is running on port ${port}`);
+    const httpsOptions = {
+      key: fs.readFileSync('/etc/letsencrypt/live/safecity-toronto.l5.ca/privkey.pem'),
+      cert: fs.readFileSync('/etc/letsencrypt/live/safecity-toronto.l5.ca/fullchain.pem'),
+    };
+
+    const httpsPort = 443; // HTTPS port
+    https.createServer(httpsOptions, this.app).listen(httpsPort, '0.0.0.0', () => {
+      console.log(`Server is running securely on HTTPS port ${httpsPort}`);
+    });
+
+    const http = require('http');
+    const httpPort = 80; // HTTP port
+    http.createServer((req, res) => {
+      res.writeHead(301, { Location: `https://${req.headers.host}${req.url}` });
+      res.end();
+    }).listen(httpPort, '0.0.0.0', () => {
+      console.log(`HTTP traffic is redirected to HTTPS`);
     });
   }
 
@@ -36,16 +52,13 @@ class NeighbourhoodApiServer {
       );
       const packageData = await packageResponse.json();
 
-      // Get the datastore resources for the package
       let datastoreResources = packageData["result"]["resources"].filter(r => r.datastore_active);
 
-      // Ensure there's at least one active datastore resource
       if (datastoreResources.length === 0) {
         throw new Error("No active datastore resources found");
       }
 
       const data = await this.getDatastoreResource(datastoreResources[0]);
-      // Send the API response
       res.json(data);
     } catch (error) {
       console.error("Error fetching API:", error);
@@ -57,7 +70,7 @@ class NeighbourhoodApiServer {
   async getDatastoreResource(resource) {
     const records = [];
     let offset = 0;
-    const limit = 100; // Default limit for pagination
+    const limit = 100;
 
     while (true) {
       const response = await fetch(
@@ -65,14 +78,12 @@ class NeighbourhoodApiServer {
       );
       const responseData = await response.json();
 
-      // Accumulate the records
       records.push(...responseData["result"]["records"]);
 
-      // Check if we have received fewer records than the limit (indicating we're at the last page)
       if (responseData["result"]["records"].length < limit) {
-        break; // No more data, stop fetching
+        break;
       } else {
-        offset += limit; // Increase the offset to fetch the next page
+        offset += limit;
       }
     }
 
@@ -83,4 +94,3 @@ class NeighbourhoodApiServer {
 // Instantiate and start the server
 const server = new NeighbourhoodApiServer();
 server.start();
- 

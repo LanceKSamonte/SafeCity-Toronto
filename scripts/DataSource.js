@@ -7,7 +7,7 @@ class DataSource{
      * method to read geoJson file
      */
     async getData() {
-        const SERVER_URL = 'http://3.23.112.16:8000/api/neighbourhoods';
+        const SERVER_URL = 'https://safecity-toronto.l5.ca/api/neighbourhoods';
 
         try {
             // Fetch from server with timeout
