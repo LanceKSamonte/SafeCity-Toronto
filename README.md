@@ -21,5 +21,15 @@ https://leafletjs.com/
 
 ### Data is taken from Toronto's open data catalogue
 https://open.toronto.ca/
-<hr><br>
-The server is hosted on Render so the data may take a while to show up if no one is using the website
+<hr>
+
+### Steps to Run a Server Locally
+1. Download the zip file.
+2. Extract the folder and open the project in a code editor.
+3. Open a terminal and download the dependencies by running this command:<br>
+```npm install```
+4. Then you can run the local server by running the command:<br>
+```node ./backend/localServer.js```
+5. In the DataSource, you can replace the SERVER_URL to the link that will be shown in the terminal:<br>
+```http://localhost:8000/api/neighbourhoods```<br>
+You are done! Now you can test the local server.
