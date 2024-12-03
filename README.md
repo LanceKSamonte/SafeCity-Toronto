@@ -27,9 +27,15 @@ https://open.toronto.ca/
 1. Download the zip file.
 2. Extract the folder and open the project in a code editor.
 3. Open a terminal and download the dependencies by running this command:<br>
-```npm install```
-4. Then you can run the local server by running the command:<br>
-```node ./backend/localServer.js```
-5. In the DataSource, you can replace the SERVER_URL to the link that will be shown in the terminal:<br>
-```http://localhost:8000/api/neighbourhoods```<br>
+```bash
+npm install
+```
+5. Then you can run the local server by running the command:<br>
+```bash
+node ./backend/localServer.js
+```
+7. In the DataSource, you can replace the SERVER_URL to the link that will be shown in the terminal:<br>
+```bash
+http://localhost:8000/api/neighbourhoods
+```
 You are done! Now you can test the local server.
