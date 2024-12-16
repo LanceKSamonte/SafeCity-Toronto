@@ -25,7 +25,7 @@ class DataSource{
             console.log(neighbourhoods); // Log the neighbourhoods data for debugging
     
         } catch (error) {
-            alert("Server may be down");
+            alert("Server may be down cuz I ain't paying lol");
             console.error("Error loading data from server", error);
         }
     }
