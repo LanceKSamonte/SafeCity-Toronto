@@ -7,7 +7,7 @@ class DataSource{
      * method to read geoJson file
      */
     async getData() {
-        const SERVER_URL = 'https://safecity-toronto.onrender.com/api/neighbourhoods';
+        const SERVER_URL = 'https://safe-city-toronto.vercel.app/api/neighbourhoods';
 
         try {
             // Fetch from server with timeout
