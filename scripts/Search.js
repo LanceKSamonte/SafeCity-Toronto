@@ -22,7 +22,7 @@ class Search {
      */
     async getSearchData() {
         try {
-            const packageResponse = await fetch('https://safecity-toronto.l5.ca/api/neighbourhoods');
+            const packageResponse = await fetch('https://safe-city-toronto.vercel.app/api/neighbourhoods');
             const packageData = await packageResponse.json();
     
             const neighbourhoods = new DataSource();
