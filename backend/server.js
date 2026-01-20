@@ -1,4 +1,3 @@
-//This is how the server looks from the EC2 instance
 import express from "express";
 import fetch from "node-fetch";
 import cors from "cors";
@@ -12,30 +11,28 @@ class NeighbourhoodApiServer {
     this.setupRoutes();
   }
 
-  // Setup middleware such as CORS and static file serving
   setupMiddleware() {
     this.app.use(cors());
   }
 
-  // Setup routes for the API
   setupRoutes() {
     this.app.get("/api/neighbourhoods", this.handleNeighbourhoodRequest.bind(this));
   }
 
-  // Start the server
+  // start the server
   start() {
     const httpsOptions = {
       key: fs.readFileSync('/etc/letsencrypt/live/safecity-toronto.l5.ca/privkey.pem'),
       cert: fs.readFileSync('/etc/letsencrypt/live/safecity-toronto.l5.ca/fullchain.pem'),
     };
 
-    const httpsPort = 443; // HTTPS port
+    const httpsPort = 443;
     https.createServer(httpsOptions, this.app).listen(httpsPort, '0.0.0.0', () => {
       console.log(`Server is running securely on HTTPS port ${httpsPort}`);
     });
 
     const http = require('http');
-    const httpPort = 80; // HTTP port
+    const httpPort = 80; 
     http.createServer((req, res) => {
       res.writeHead(301, { Location: `https://${req.headers.host}${req.url}` });
       res.end();
@@ -67,7 +64,7 @@ class NeighbourhoodApiServer {
     }
   }
 
-  // Helper function to fetch datastore resources
+  // fetch data resources
   async getDatastoreResource(resource) {
     const records = [];
     let offset = 0;
@@ -92,6 +89,5 @@ class NeighbourhoodApiServer {
   }
 }
 
-// Instantiate and start the server
 const server = new NeighbourhoodApiServer();
 server.start();
