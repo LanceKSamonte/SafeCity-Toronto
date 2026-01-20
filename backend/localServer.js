@@ -1,5 +1,5 @@
 import express from "express";
-import fetch from "node-fetch"; // Use `import` instead of `require`
+import fetch from "node-fetch"; 
 import cors from "cors";
 
 class NeighbourhoodApiServer {
@@ -10,12 +10,10 @@ class NeighbourhoodApiServer {
     this.setupRoutes();
   }
 
-  // Setup middleware such as CORS
   setupMiddleware() {
     this.app.use(cors());
   }
 
-  // Setup routes for the API
   setupRoutes() {
     this.app.get("/api/neighbourhoods", this.handleNeighbourhoodRequest.bind(this));
   }
@@ -54,11 +52,11 @@ class NeighbourhoodApiServer {
     }
   }
 
-  // Helper function to fetch datastore resources
+  // fetch data resources
   async getDatastoreResource(resource) {
     const records = [];
     let offset = 0;
-    const limit = 100; // Default limit for pagination
+    const limit = 100; 
 
     while (true) {
       const response = await fetch(
@@ -66,14 +64,13 @@ class NeighbourhoodApiServer {
       );
       const responseData = await response.json();
 
-      // Accumulate the records
       records.push(...responseData["result"]["records"]);
-
-      // Check if we have received fewer records than the limit (indicating we're at the last page)
+      
+      // check for more data
       if (responseData["result"]["records"].length < limit) {
         break; // No more data, stop fetching
       } else {
-        offset += limit; // Increase the offset to fetch the next page
+        offset += limit; // fetch the next page if available
       }
     }
 
@@ -81,6 +78,5 @@ class NeighbourhoodApiServer {
   }
 }
 
-// Instantiate and start the server
 const server = new NeighbourhoodApiServer(8000);
 server.start();
